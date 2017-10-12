@@ -1,0 +1,25 @@
+.DS_Store
+node_modules/
+.idea/
+
+run/secrets/
+.elasticbeanstalk/
+
+# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+!.elasticbeanstalk/*.cfg.yml
+
+!.elasticbeanstalk/*.global.yml
+
+.env
+config/local/secrets
+config/production
+config/.env
+dist/
+package-lock.json
+run/
+
+ts-node*
+.v8flags*
