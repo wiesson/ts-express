@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "private": true,
   "devDependencies": {
     "@types/node": "^8.0.34",
     "prettier": "^1.7.4",
@@ -16,6 +15,9 @@
     "express": "^4.16.2"
   },
   "scripts": {
+    "start": "node index.js",
+    "prestart:prod": "tsc",
+    "start:prod": "node dist/server.js",
     "format": "./node_modules/.bin/prettier --write --single-quote --trailing-comma es5 ./src/**/*.ts"
   }
 }
