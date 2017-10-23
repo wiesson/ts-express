@@ -1,18 +1,18 @@
 import * as express from 'express';
+import * as logger from "morgan";
+import * as compression from "compression";
 
-const app = express();
-const port = process.env.PORT || 2015;
+import * as apiController from "./controllers/api";
 
-app.set('x-powered-by', false);
+const server = express();
+server.use(compression());
+server.use(logger("dev"));
+server.set("port", process.env.PORT || 2015);
+server.set('x-powered-by', false);
 
-app.get('/login', async (req, res) => {
-  try {
-    res.send({ hello: 'user' });
-  } catch (err) {
-    res.status(400).json({ error: err.toString() });
-  }
+server.get("/api", apiController.getApi);
 
-  setTimeout(() => console.log(`User logged in at ${new Date()}`), 2000);
+server.listen(server.get("port"), () => {
+  console.log(("  App is running at http://localhost:%d in %s mode"), server.get("port"), server.get("env"));
+  console.log("  Press CTRL-C to stop\n");
 });
-
-app.listen(port, () => console.log(`Started on port ${port}!`));
