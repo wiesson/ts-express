@@ -27,7 +27,7 @@
     "start": "node index.js",
     "prestart:prod": "tsc",
     "start:prod": "node dist/server.js",
-    "format": "./node_modules/.bin/prettier --write --single-quote --trailing-comma es5 ./(src|test)/**/*.ts",
+    "format": "./node_modules/.bin/prettier --write --single-quote --trailing-comma es5 './?(src|test)/**/*.ts'",
     "test": "./node_modules/.bin/jest --forceExit"
   },
   "jest": {
