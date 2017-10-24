@@ -5,10 +5,10 @@ const request = require('supertest');
 import app from '../src/app';
 
 describe('Test the /api routes', () => {
-  describe('GET /api', () => {
+  describe('GET /api/v1/users', () => {
     it('should return 200 OK', () =>
       request(app)
-        .get('/api')
+        .get('/api/v1/users')
         .expect(200));
   });
 
