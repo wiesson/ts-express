@@ -9,3 +9,8 @@ Start
 ```
 node index.js
 ```
+
+Development
+```
+yarn run dev
+```
