@@ -31,9 +31,7 @@ build:
   after_script:
     - ls -lah
   artifacts:
-    paths:
-    - dist/
-    expire_in: 1 week
+    untracked: true
 
 docker-build:
   stage: package
