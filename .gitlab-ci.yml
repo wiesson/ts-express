@@ -28,6 +28,8 @@ build:
   script:
     - yarn install --production --ignore-scripts --prefer-offline
     - yarn cache clean
+  after_script:
+    - ls -lah
   artifacts:
     paths:
     - dist/
@@ -37,7 +39,7 @@ docker-build:
   stage: package
   image: docker:latest
   before_script:
-    - docker info
+    - ls -lah
   dependencies:
     - test
     - build
