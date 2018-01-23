@@ -23,3 +23,6 @@ run/
 
 ts-node*
 .v8flags*
+
+.editorconfig
+*.log
