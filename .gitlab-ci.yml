@@ -1,0 +1,55 @@
+image: docker:latest
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - test
+  - build
+  - package
+  - deploy_dev
+
+test:
+  services:
+    - mongo
+  stage: test
+  image: node:8.9.4-alpine
+  before_script:
+    - yarn install
+    - yarn build
+  script:
+    - yarn test
+
+build:
+  stage: build
+  image: node:8.9.4-alpine
+  dependencies:
+    - test
+  script:
+    - yarn install --production --ignore-scripts --prefer-offline
+    - yarn cache clean
+  artifacts:
+    paths:
+    - dist/
+    expire_in: 1 week
+
+docker-build:
+  stage: package
+  image: docker:latest
+  before_script:
+    - docker info
+  dependencies:
+    - test
+    - build
+  only: [master]
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
+  script:
+    - docker build -t registry.gitlab.com/ts-express/$CI_PROJECT_NAME .
+    - docker tag registry.gitlab.com/ts-express/$CI_PROJECT_NAME registry.gitlab.com/energybox/$CI_PROJECT_NAME:$CI_BUILD_REF
+    - docker push registry.gitlab.com/ts-express/$CI_PROJECT_NAME:$CI_BUILD_REF
+    - docker push registry.gitlab.com/ts-express/$CI_PROJECT_NAME:latest
+
