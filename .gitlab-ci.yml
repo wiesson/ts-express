@@ -8,7 +8,6 @@ stages:
   - test
   - build
   - package
-  - deploy_dev
 
 test:
   services:
@@ -42,7 +41,6 @@ docker-build:
   dependencies:
     - test
     - build
-  only: [master]
   services:
     - docker:dind
   before_script:
