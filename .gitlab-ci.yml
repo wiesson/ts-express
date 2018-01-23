@@ -38,14 +38,13 @@ build:
 docker-build:
   stage: package
   image: docker:latest
-  before_script:
-    - ls -lah
   dependencies:
     - test
     - build
   services:
     - docker:dind
   before_script:
+    - ls
     - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
   script:
     - docker build -t registry.gitlab.com/ts-express/$CI_PROJECT_NAME .
