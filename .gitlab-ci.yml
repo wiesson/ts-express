@@ -28,7 +28,6 @@ build:
   script:
     - yarn run build
     - yarn cache clean
-    - rm -- !(dist/)
   after_script:
   artifacts:
     untracked: true
