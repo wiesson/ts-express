@@ -1,0 +1,11 @@
+pipelines:
+  default:
+    - step:
+        name: Test
+        image: node:8.9.4-alpine
+        script:
+          - yarn run install
+          - yarn build
+          - yarn test
+
+
