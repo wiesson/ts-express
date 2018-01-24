@@ -13,7 +13,6 @@ pipelines:
           - dist/**
     - step:
         name: Build and push container to registry
-        image: node:8.9.4-alpine
         script:
           - docker build -t $BITBUCKET_REPO_SLUG .
           - docker tag $BITBUCKET_REPO_SLUG $BITBUCKET_REPO_SLUG:latest
