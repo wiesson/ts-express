@@ -1,11 +1,15 @@
 pipelines:
   default:
     - step:
+        caches:
+          - node
         name: Test
         image: node:8.9.4-alpine
         script:
           - yarn install
           - yarn build
           - yarn test
+        artifacts:
+          - dist/**
 
 
