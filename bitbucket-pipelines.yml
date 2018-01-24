@@ -11,5 +11,18 @@ pipelines:
           - yarn test
         artifacts:
           - dist/**
+    - step:
+        name: Build and push container to registry
+        image: node:8.9.4-alpine
+        script:
+          - docker build -t $BITBUCKET_REPO_SLUG .
+          - docker tag $BITBUCKET_REPO_SLUG $BITBUCKET_REPO_SLUG:latest
+          - docker tag $BITBUCKET_REPO_SLUG $BITBUCKET_REPO_SLUG:$BITBUCKET_COMMIT
+        # - docker push $AWS_CONTAINER_REGISTRY/ts-express:latest
+        # - docker push $AWS_CONTAINER_REGISTRY/ts-express:$BITBUCKET_COMMIT
+        artifacts:
+          - dist/**
+        services:
+          - docker
 
 
